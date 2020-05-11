@@ -1,13 +1,12 @@
 require "sinatra"
 require "sinatra/json"
 require "sinatra/reloader"
-require 'rack/contrib'
-
+require "rack/contrib"
+require "rest-client"
 require "graphql"
+require "pry"
 
-
-
-Dir.glob("graphql/types/*.rb").each do |f|
+Dir.glob(["graphql/types/*.rb", "models/*.rb"]).each do |f|
   require_relative f
 end
 require_relative "graphql/schema.rb"

@@ -11,11 +11,17 @@ class QueryType < GraphQL::Schema::Object
     argument :slug, String, required: true
   end
 
+  field :countries, [::Types::CountryType], null: false
+
   def country_by_code(code:)
     Models::Country.find_by(field: "ISO2", value: code)
   end
 
   def country_by_slug(slug:)
     Models::Country.find_by(field: "Slug", value: slug)
+  end
+
+  def countries
+    Models::Country.all
   end
 end

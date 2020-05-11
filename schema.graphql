@@ -1,4 +1,14 @@
+type CasesSummary {
+  confirmed: Int
+  confirmedToday: Int
+  deaths: Int
+  deathsToday: Int
+  recovered: Int
+  recoveredToday: Int
+}
+
 type Country {
+  casesSummary: CasesSummary
   code: String!
   name: String!
   slug: String!

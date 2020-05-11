@@ -1,0 +1,20 @@
+type Country {
+  code: String!
+  name: String!
+  slug: String!
+}
+
+"""
+The query root of this schema
+"""
+type Query {
+  """
+  Find a country by code
+  """
+  countryByCode(code: String!): Country
+
+  """
+  Find a country by slug
+  """
+  countryBySlug(slug: String!): Country
+}

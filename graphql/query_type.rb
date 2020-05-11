@@ -12,10 +12,10 @@ class QueryType < GraphQL::Schema::Object
   end
 
   def country_by_code(code:)
-    Models::Country.get(filter: "ISO2", value: code)
+    Models::Country.find_by(field: "ISO2", value: code)
   end
 
   def country_by_slug(slug:)
-    Models::Country.get(filter: "Slug", value: slug)
+    Models::Country.find_by(field: "Slug", value: slug)
   end
 end

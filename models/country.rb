@@ -1,11 +1,16 @@
 module Models
   class Country
-    def self.get(filter:, value:)
-      url = 'https://api.covid19api.com/countries'
-      result = RestClient.get(url)
-      country_data = JSON.parse(result)
+
+    def self.all
+      countries = request
+      countries.map do |hsh|
+        Country.new(hsh).to_graphql
+      end
+    end
+
+    def self.find_by(field:, value:)
       country = country_data.find {|c| c[filter] == value }
-      to_graphql(country)
+      Country.new(country)
     end
 
     def self.to_graphql(country)
@@ -17,6 +22,30 @@ module Models
         slug: country["Slug"]
       }
     end
+
+    def self.request
+      url = 'https://api.covid19api.com/countries'
+      result = RestClient.get(url)
+      JSON.parse(result)
+    end
+
+    def initialize(hsh = {})
+        @name = hsh["Country"]
+        @code = hsh["ISO2"]
+        @slug = hsh["Slug"]
+    end
+
+    def to_graphql
+      return {} unless @name
+
+      {
+        name: @name,
+        code: @code,
+        slug: @slug
+      }
+    end
+
+
 
   end
 end

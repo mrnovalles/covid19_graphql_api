@@ -8,6 +8,8 @@ type Country {
 The query root of this schema
 """
 type Query {
+  countries: [Country!]!
+
   """
   Find a country by code
   """

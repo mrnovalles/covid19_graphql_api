@@ -1,10 +1,13 @@
 require "sinatra"
 require "sinatra/json"
 require "sinatra/reloader"
+configure :production do
+  enable :reloader
+end
 require "rack/contrib"
 require "rest-client"
 require "graphql"
-require "pry"
+require "byebug"
 
 Dir.glob(["graphql/types/*.rb", "models/*.rb"]).each do |f|
   require_relative f

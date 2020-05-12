@@ -7,9 +7,9 @@ module Types
     field :code, String, null: false
     field :casesSummary, Types::CasesSummaryType, null: true
 
-    # TODO: Add a lazy-loader, imagine asking for this field in `countries` query
     def cases_summary
-      CasesSummary.find_by_country(slug: object.slug)
+      # CasesSummary.find_by_country(slug: object.slug)
+      LazyCasesSummaryFinder.new(context, object.slug)
     end
   end
 end

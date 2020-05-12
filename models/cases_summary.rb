@@ -1,9 +1,20 @@
 class CasesSummary
   URL = "https://api.covid19api.com/summary"
 
+  def self.all_from_file
+    JSON.parse(File.read("data/summary.json"))["Countries"].map do |hsh|
+      new(hsh)
+    end
+  end
+
+  def self.all
+    summary["Countries"].map do |hsh|
+      new(hsh)
+    end
+  end
+
   def self.find_by_country(slug:)
-    country_summary = summary["Countries"].find {|data| data["Slug"] == slug}
-    CasesSummary.new(country_summary)
+    all.find {|case_summary| case_summary.country_slug == slug}
   end
 
   def self.summary
@@ -12,6 +23,7 @@ class CasesSummary
   end
 
    attr_reader(
+     :country_slug,
      :confirmed,
      :confirmed_today,
      :deaths,
@@ -21,6 +33,7 @@ class CasesSummary
    )
 
   def initialize(hsh)
+    @country_slug = hsh["Slug"]
     @confirmed = hsh["TotalConfirmed"]
     @confirmed_today = hsh["NewConfirmed"]
     @deaths = hsh["TotalDeaths"]

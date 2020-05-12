@@ -22,6 +22,6 @@ class QueryType < GraphQL::Schema::Object
   end
 
   def countries
-    Models::Country.all
+    Models::Country.all_from_file
   end
 end

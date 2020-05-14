@@ -17,7 +17,11 @@ require_relative "graphql/query_type.rb"
 
 use Rack::JSONBodyParser
 
-post '/graphql' do
+get "/" do
+  redirect "/graphiql"
+end
+
+post "/graphql" do
   result  = Schema.execute(
     query: params[:query],
     variables: params[:variables],

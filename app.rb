@@ -15,7 +15,7 @@ end
 require_relative "graphql/schema.rb"
 require_relative "graphql/query_type.rb"
 
-use Rack::PostBodyContentTypeParser
+use Rack::JSONBodyParser
 
 post '/graphql' do
   result  = Schema.execute(

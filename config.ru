@@ -1,2 +1,2 @@
 require './app'
-run ConferenceApp
+run Sinatra::Application

@@ -11,6 +11,8 @@ class CasesSummary
     summary["Countries"].map do |hsh|
       new(hsh)
     end
+  rescue
+    all_from_file
   end
 
   def self.find_by_country(slug:)

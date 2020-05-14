@@ -12,6 +12,8 @@ module Models
       countries.map do |hsh|
         Country.new(hsh)
       end
+    rescue Exception
+      all_from_file
     end
 
     def self.find_by(options)

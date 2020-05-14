@@ -14,8 +14,10 @@ module Models
       end
     end
 
-    def self.find_by(field:, value:)
-      all.find {|_country| _country.send(field) == value }
+    def self.find_by(options)
+      raise unless options.size == 1
+
+      all.find {|_country| _country.send(options.keys.first) == options.values.first }
     end
 
     def self.countries
